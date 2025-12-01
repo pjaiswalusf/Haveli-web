@@ -1,34 +1,19 @@
 {
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": [],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "preserve",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/app/*": ["app/*"],
-      "@/data/*": ["data/*"],
-      "@/lib/*": ["lib/*"],
-      "@/store/*": ["store/*"]
-    },
-    "allowJs": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": ["**/*.cjs", "**/*.mjs", "**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  }
 }

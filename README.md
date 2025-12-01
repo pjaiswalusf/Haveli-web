@@ -1,52 +1,73 @@
-Haveli — Indian Restaurant (Next.js 15)
+# React + TypeScript + Vite
 
-Tech
-- Next.js 15 (App Router, TypeScript)
-- Tailwind CSS v4 (custom theme)
-- shadcn-style UI (lightweight components in `components/ui`)
-- Stripe (Payments) — Elements + API routes
-- zustand (persisted cart)
-- zod + react-hook-form (forms)
-- react-bits (subtle animations)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Getting Started
-1) Install deps
-   - pnpm install (or npm/yarn)
-2) Set env vars (see .env.example)
-3) Run dev server
-   - pnpm dev
+Currently, two official plugins are available:
 
-Env Vars (.env.local)
-- NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-- STRIPE_SECRET_KEY=
-- NEXT_PUBLIC_CURRENCY=USD
-- NEXT_PUBLIC_SITE_URL=http://localhost:3000
-- SEND_CATERING_EMAIL=true|false
-- SEND_CONTACT_EMAIL=true|false
-- EMAIL_PROVIDER=resend|sendgrid
-- EMAIL_API_KEY=...
-- CATERING_DEPOSIT_ENABLED=true|false
-- CATERING_DEPOSIT_CENTS=5000
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Pages
-- `/` Home — hero, featured items, hours/location, testimonials
-- `/menu` Menu — category tabs, item cards, add-to-cart, sticky tabs, skeletons
-- `/order` Order — editable cart, tip selector, pickup time, notes, contact, Stripe Elements checkout
-- `/order/confirm` Confirmation — shows order number
-- `/catering` Catering — packages, add-ons, request form, optional Stripe deposit
-- `/contact` Contact — address, map, tap-to-call, inquiry form
+## React Compiler
 
-Stripe
-- API route: `POST /api/create-payment-intent` validates items from static data and creates a PaymentIntent.
-- Configure `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY`.
+The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-Email (optional)
-- API routes `POST /api/catering-request` and `POST /api/contact` are wired to optionally send email. Add a provider and key to enable.
+## Expanding the ESLint configuration
 
-Data
-- Static, in `data/`. Update prices and flags here.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Notes
-- No user accounts or database. Cart is client-side, persisted via localStorage.
-- Tailwind v4 theme tokens live in `app/globals.css` and `tailwind.config.ts`.
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
