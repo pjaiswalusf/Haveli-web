@@ -12,7 +12,7 @@ export default function Hero({ onOpenMenu }: HeroProps) {
     id: i,
     left: `${Math.random() * 30 - 10}%`,
     bottom: `${Math.random() * 20 - 10}%`,
-    delay: 1 + Math.random() * 1.5,
+    delay: 1 + Math.random() * 2,
     duration: 4 + Math.random() * 3,
     rotate: Math.random() * 360,
     scale: 0.5 + Math.random() * 0.5,
@@ -22,7 +22,7 @@ export default function Hero({ onOpenMenu }: HeroProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 3 }}
         className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80 z-0 pointer-events-none backdrop-blur-xs"
       />
 
@@ -102,7 +102,8 @@ export default function Hero({ onOpenMenu }: HeroProps) {
           Authentic Indian Cuisine
         </motion.span>
 
-        <div className="relative font-great-vibes w-full h-[25vh] mx-auto -ml-18 mt-12">
+        {/* Haveli Text */}
+        <div className="relative font-great-vibes w-full xl:h-[25vh] mx-auto -ml-18 mt-12">
           <svg className="w-full h-full overflow-visible" viewBox="0 0 600 200">
             <defs>
               <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -115,7 +116,8 @@ export default function Hero({ onOpenMenu }: HeroProps) {
               </linearGradient>
             </defs>
             {/* Stroke Animation */}
-            <motion.text
+            {/* Stroke Animation */}
+            <text
               x="50%"
               y="50%"
               textAnchor="middle"
@@ -124,12 +126,22 @@ export default function Hero({ onOpenMenu }: HeroProps) {
               stroke="url(#gold-gradient)"
               strokeWidth="2"
               fill="transparent"
-              initial={{ strokeDasharray: 5000, strokeDashoffset: 5000 }}
-              animate={{ strokeDashoffset: 0 }}
-              transition={{ duration: 5, ease: "easeInOut" }}
             >
-              Haveli
-            </motion.text>
+              {"Haveli".split("").map((letter, i) => (
+                <motion.tspan
+                  key={i}
+                  initial={{ strokeDasharray: 3000, strokeDashoffset: 3000 }}
+                  animate={{ strokeDashoffset: 0 }}
+                  transition={{
+                    duration: 3,
+                    delay: i === 0 ? 0 : 1.5 + (i * 0.3),
+                    ease: "easeInOut",
+                  }}
+                >
+                  {letter}
+                </motion.tspan>
+              ))}
+            </text>
             {/* Fill Fade In */}
             <motion.text
               x="50%"
@@ -141,7 +153,7 @@ export default function Hero({ onOpenMenu }: HeroProps) {
               stroke="none"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1.5, delay: 3, ease: "easeOut" }}
+              transition={{ duration: 2, delay: 3, ease: "easeOut" }}
             >
               Haveli
             </motion.text>
