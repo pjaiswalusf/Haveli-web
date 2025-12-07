@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function Order() {
   return (
-    <section id="order" className="relative py-24 bg-[url('/images/black_gold_pattern.png')] bg-cover bg-center bg-fixed text-white h-[500px] flex flex-col items-center justify-center">
+    <section id="order" className="relative py-24 bg-[url('/images/black_gold_pattern.png')] bg-cover bg-center bg-fixed text-white md:h-[500px] flex flex-col items-center justify-center">
       <div className="absolute inset-0 bg-black/70 pointer-events-none" />
       <div className="container text-center relative z-10">
         <motion.div

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-24">
+    <section id="about" className="relative overflow-hidden py-24 md:py-36">
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[rgba(212,175,55,0.05)] to-transparent pointer-events-none" />
       {/* Bottom blend */}

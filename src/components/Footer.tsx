@@ -37,30 +37,30 @@ export default function Footer() {
     <footer id="location" className="relative bg-bg-alt border-t border-gray-200 pt-20 pb-10 overflow-hidden">
       <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(100%_50%_at_bottom,_var(--color-primary)_0%,_transparent_70%)] opacity-10 pointer-events-none" />
       <div className="container relative z-10">
-        <div className="flex gap-12 mb-16 max-w-6xl mx-auto justify-between">
+        <div className="flex flex-col md:flex-row gap-12 mb-16 max-w-6xl mx-auto justify-between items-center md:items-stretch">
           {/* Logo */}
-          <div className="flex justify-center w-64">
+          <div className="flex justify-center w-full md:w-64">
             <img
               src="/images/logo.png"
               alt="Haveli Indian Kitchen Logo"
             />
           </div>
 
-          <div className="w-px bg-primary self-stretch" />
+          <div className="hidden md:block w-px bg-primary self-stretch" />
 
           {/* Contact Info */}
-          <div className='w-2/5'>
+          <div className='w-full md:w-2/5 flex flex-col items-center md:items-start'>
             <h3 className="text-2xl font-serif text-primary mb-6">Visit Us</h3>
-            <ul className="list-none flex flex-col gap-4 text-gray-500">
-              <li className="flex items-start gap-3">
+            <ul className="list-none flex flex-col gap-4 text-gray-500 w-full max-w-xs md:max-w-none">
+              <li className="flex items-start gap-3 justify-center md:justify-start">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <span>12908 N Dale Mabry Hwy,<br />Tampa, FL 33618</span>
+                <span className="text-left">12908 N Dale Mabry Hwy,<br />Tampa, FL 33618</span>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-center gap-3 justify-center md:justify-start">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                 <span>+1 (813) 488-6294</span>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-center gap-3 justify-center md:justify-start">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                 <span>hello@havelikitchen.com</span>
               </li>
@@ -68,14 +68,14 @@ export default function Footer() {
           </div>
 
           {/* Hours */}
-          <div className='w-3/5'>
-            <div className="flex items-center gap-4 mb-6">
+          <div className='w-full md:w-3/5'>
+            <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
               <h3 className="text-2xl font-serif text-primary mb-0">Opening Hours</h3>
               <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${isOpen ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-red-100 text-red-700 border border-red-200'}`}>
                 {isOpen ? 'Open Now!' : 'Closed'}
               </span>
             </div>
-            <ul className="list-none flex flex-col gap-4 text-gray-500">
+            <ul className="list-none flex flex-col gap-4 text-gray-500 w-full max-w-sm mx-auto md:max-w-none md:mx-0">
               <li className="flex justify-between border-b border-gray-200 pb-2">
                 <span>Mon, Wed - Sun</span>
                 <div className="text-right">

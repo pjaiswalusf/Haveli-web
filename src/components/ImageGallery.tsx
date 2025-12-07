@@ -20,12 +20,12 @@ function GalleryRow({ images, direction = "left", speed = 150 }: { images: strin
     <div ref={ref} className="flex overflow-hidden mb-8">
       <motion.div
         style={{ x }}
-        className="flex gap-8 px-4"
+        className="flex gap-3 md:gap-6 lg:gap-8 px-4"
       >
         {images.map((src, i) => (
           <div
             key={i}
-            className={`relative w-72 h-72 flex-shrink-0 overflow-hidden rounded-3xl ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} hover:rotate-0 transition-transform duration-500`}
+            className={`relative w-32 h-32 md:w-60 md:h-60 lg:w-72 lg:h-72  flex-shrink-0 overflow-hidden rounded-3xl ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} hover:rotate-0 transition-transform duration-500`}
           >
             <img
               src={src}

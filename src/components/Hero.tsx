@@ -103,7 +103,7 @@ export default function Hero({ onOpenMenu }: HeroProps) {
         </motion.span>
 
         {/* Haveli Text */}
-        <div className="relative font-great-vibes w-full xl:h-[25vh] mx-auto -ml-18 mt-12">
+        <div className="relative font-great-vibes w-full xl:h-[25vh] mx-auto h-28 -ml-4 xl:-ml-18 mt-12 xl:mt-24">
           <svg className="w-full h-full overflow-visible" viewBox="0 0 600 200">
             <defs>
               <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -134,7 +134,7 @@ export default function Hero({ onOpenMenu }: HeroProps) {
                   animate={{ strokeDashoffset: 0 }}
                   transition={{
                     duration: 3,
-                    delay: i === 0 ? 0 : 1.5 + (i * 0.3),
+                    delay: i === 0 ? 0 : 1.5 + (i * 0.2),
                     ease: "easeInOut",
                   }}
                 >
