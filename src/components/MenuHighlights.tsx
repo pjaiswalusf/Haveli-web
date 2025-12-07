@@ -7,7 +7,7 @@ const items = [
     id: 1,
     name: "Butter Chicken",
     description: "Tender chicken morsels simmered in a rich, creamy tomato sauce, finishing with a touch of fenugreek. A timeless classic.",
-    image: "/images/butter-chicken-new.png",
+    image: "/images/butter-chicken.png",
     review: {
       text: <>The best <span className="text-white font-bold">butter chicken</span> I've ever had! Other dishes like vegetable Malabar are really good also as is the naan and mango lassi. I crave this place all the time. Totally addicted.</>,
       author: "T T",
@@ -112,7 +112,7 @@ export default function MenuHighlights({ onOpenMenu }: MenuHighlightsProps) {
                   transition={{ duration: 0.5 }}
                   className="absolute top-0 left-0 w-full h-full flex flex-col"
                 >
-                  <h3 className="text-3xl md:text-5xl font-serif text-white mb-2 md:mb-4">{item.name}</h3>
+                  <h3 className="md:mt-8 text-5xl md:text-7xl font-great-vibes text-white mb-2 md:mb-4">{item.name}</h3>
                   <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4 md:mb-8 line-clamp-3 md:line-clamp-none">
                     {item.description}
                   </p>
