@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Leaf } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-
+import Link from 'next/link';
 
 interface HeroProps {
     onOpenMenu: () => void;
@@ -193,7 +193,9 @@ export default function Hero({ onOpenMenu }: HeroProps) {
                             variant="outline"
                             className="py-6 px-8 rounded-full text-base font-medium min-w-[160px] bg-primary/10 backdrop-blur-xs border-primary text-white hover:bg-primary hover:text-black transition-all hover:scale-105"
                         >
-                            <a href="#order">Order Now</a>
+                            <Link href="/order">
+                                Order Now
+                            </Link>
                         </Button>
                     </motion.div>
                 </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { CartProvider } from "@/app/context/cart-context";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -29,8 +30,10 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${greatVibes.variable} antialiased`}
       >
-        <SmoothScroll />
-        {children}
+        <CartProvider>
+          <SmoothScroll />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

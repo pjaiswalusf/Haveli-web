@@ -20,6 +20,7 @@ export interface MenuItem {
     isVegetarian?: boolean;
     isSpicy?: boolean;
     isGlutenFree?: boolean; // Inferred or placeholder
+    hasSpiceLevel?: boolean; // Controls if spice level option is shown
 }
 
 export interface CartItem {
@@ -35,7 +36,7 @@ export interface CartItem {
 export const menuItems: MenuItem[] = [
     // APPETIZERS
     { id: "app-1", name: "Masala Pappad", description: "Roasted lentil chips topped with onions, tomatoes, and chili lemon salt", price: "$6.95", category: "Appetizers", isVegetarian: true },
-    { id: "app-2", name: "Vegetarian Samosa (2pcs)", description: "Crisp turnovers stuffed with potatoes and peas", price: "$7.95", category: "Appetizers", isVegetarian: true },
+    { id: "app-2", name: "Vegetarian Samosa (2pcs)", description: "Crisp turnovers stuffed with potatoes and peas", price: "$7.95", category: "Appetizers", isVegetarian: true, hasSpiceLevel: false },
     { id: "app-3", name: "Aloo Tikki", description: "Potato patties fried with Indian spices", price: "$7.95", category: "Appetizers", isVegetarian: true },
     { id: "app-4", name: "Mix Veg Platter", description: "Chef's selection of appetizers", price: "$15.95", category: "Appetizers", isVegetarian: true },
     { id: "app-5", name: "Manchurian", description: "Choice of one: Cauliflower / Mushroom / Babycorn / Paneer in a rich home made indo Chinese garlic sauce", price: "$14.95", category: "Appetizers", isVegetarian: true },
@@ -146,7 +147,7 @@ export const menuItems: MenuItem[] = [
     { id: "bread-1", name: "Plain Naan", price: "$2.95", category: "Breads", isVegetarian: true },
     { id: "bread-2", name: "Butter Naan", price: "$2.95", category: "Breads", isVegetarian: true },
     { id: "bread-3", name: "Garlic Naan", price: "$3.95", category: "Breads", isVegetarian: true },
-    { id: "bread-4", name: "Chili Naan", price: "$3.95", category: "Breads", isVegetarian: true },
+    { id: "bread-4", name: "Chili Naan", price: "$3.95", category: "Breads", isVegetarian: true, hasSpiceLevel: true },
     { id: "bread-5", name: "Bullet Naan", price: "$3.95", category: "Breads", isVegetarian: true },
     { id: "bread-6", name: "Onion Naan", price: "$3.95", category: "Breads", isVegetarian: true },
     { id: "bread-7", name: "Roasted Potato Naan", price: "$4.95", category: "Breads", isVegetarian: true },

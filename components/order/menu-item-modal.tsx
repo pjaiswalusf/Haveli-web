@@ -36,8 +36,18 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
 
     if (!menuItem) return null;
 
+    // Determine if spice level should be shown
+    // Uses hasSpiceLevel if defined, otherwise falls back to category defaults
+    const showSpiceLevel = menuItem.hasSpiceLevel !== undefined
+        ? menuItem.hasSpiceLevel
+        : !['Drinks', 'Desserts', 'Breads', 'Kids Meals', 'Soups'].includes(menuItem.category);
+
     const handleAddToCart = () => {
-        addToCart(menuItem, quantity, { spiceLevel, instructions });
+        const customization = {
+            instructions,
+            ...(showSpiceLevel && { spiceLevel })
+        };
+        addToCart(menuItem, quantity, customization);
         onClose();
     };
 
@@ -56,23 +66,25 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
 
                 <div className="grid gap-6 py-4">
                     {/* Spice Level Section */}
-                    <div className="space-y-3">
-                        <h4 className="font-medium text-text">Spice Level</h4>
-                        <div className="grid grid-cols-2 gap-3">
-                            {['Mild', 'Medium', 'Spicy', 'Extra Spicy'].map((level) => (
-                                <div
-                                    key={level}
-                                    onClick={() => setSpiceLevel(level)}
-                                    className={`cursor-pointer border rounded-lg p-3 text-center text-sm transition-all duration-200 ${spiceLevel === level
-                                        ? 'border-primary bg-primary/10 text-primary font-bold shadow-sm'
-                                        : 'border-zinc-200 text-text-muted hover:border-zinc-300'
-                                        }`}
-                                >
-                                    {level}
-                                </div>
-                            ))}
+                    {showSpiceLevel && (
+                        <div className="space-y-3">
+                            <h4 className="font-medium text-text">Spice Level</h4>
+                            <div className="grid grid-cols-2 gap-3">
+                                {['Mild', 'Medium', 'Spicy', 'Extra Spicy'].map((level) => (
+                                    <div
+                                        key={level}
+                                        onClick={() => setSpiceLevel(level)}
+                                        className={`cursor-pointer border rounded-lg p-3 text-center text-sm transition-all duration-200 ${spiceLevel === level
+                                            ? 'border-primary bg-primary/10 text-primary font-bold shadow-sm'
+                                            : 'border-zinc-200 text-text-muted hover:border-zinc-300'
+                                            }`}
+                                    >
+                                        {level}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     {/* Special Instructions */}
                     <div className="space-y-3">

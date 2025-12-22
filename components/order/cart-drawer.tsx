@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { CartItem } from "@/app/data/menu";
+import Link from "next/link";
 
 interface CartDrawerProps {
     isOpen: boolean;
@@ -155,9 +156,11 @@ export function CartDrawer({ isOpen, setIsOpen, cart, updateQuantity, removeFrom
                                     <span>${(cartTotalPrice * 1.08).toFixed(2)}</span>
                                 </div>
                             </div>
-                            <Button className="w-full bg-primary text-black hover:bg-primary/90 font-bold h-12 text-lg">
-                                Checkout
-                            </Button>
+                            <Link href="/checkout" className="w-full" onClick={() => setIsOpen(false)}>
+                                <Button className="w-full bg-primary text-black hover:bg-primary/90 font-bold h-12 text-lg">
+                                    Checkout
+                                </Button>
+                            </Link>
                         </div>
                     )}
                 </SheetContent>

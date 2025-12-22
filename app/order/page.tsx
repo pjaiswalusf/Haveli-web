@@ -2,16 +2,20 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { menuItems, categories, Category, MenuItem, CartItem } from "@/app/data/menu";
+import { menuItems, categories, Category, MenuItem } from "@/app/data/menu";
 import { OrderNav } from "@/components/order/order-nav";
 import { MenuItemCard } from "@/components/order/menu-item-card";
 import { MenuItemModal } from "@/components/order/menu-item-modal";
 import { CartDrawer } from "@/components/order/cart-drawer";
 import { UtensilsCrossed } from "lucide-react";
+import { useCart } from "@/app/context/cart-context";
 
 export default function OrderPage() {
     const [activeCategory, setActiveCategory] = useState<Category>("Appetizers");
-    const [cart, setCart] = useState<CartItem[]>([]);
+
+    // Global Cart State
+    const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
+
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isCategorySheetOpen, setIsCategorySheetOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -22,30 +26,10 @@ export default function OrderPage() {
     const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const addToCart = (item: MenuItem, quantity: number, customization: any) => {
-        const newItem: CartItem = {
-            uniqueId: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-            menuItem: item,
-            quantity,
-            customization
-        };
-        setCart(prev => [...prev, newItem]);
+    const handleAddToCart = (item: MenuItem, quantity: number, customization: any) => {
+        addToCart(item, quantity, customization);
         setIsModalOpen(false);
-    };
-
-    const removeFromCart = (uniqueId: string) => {
-        setCart(prev => prev.filter(item => item.uniqueId !== uniqueId));
-    };
-
-    const updateQuantity = (uniqueId: string, delta: number) => {
-        setCart(prev => {
-            return prev.map(item => {
-                if (item.uniqueId === uniqueId) {
-                    return { ...item, quantity: Math.max(0, item.quantity + delta) };
-                }
-                return item;
-            }).filter(item => item.quantity > 0);
-        });
+        // Optionally open cart or show toast
     };
 
     const openCustomizeModal = (item: MenuItem) => {
@@ -60,37 +44,62 @@ export default function OrderPage() {
     };
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
+        const handleScroll = () => {
             if (isManualScroll.current) return;
 
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveCategory(entry.target.id as Category);
+            const middle = window.innerHeight / 2;
+            const threshold = 100; // Look specifically this far from top if needed, but middle is better
+
+            // 1. Bottom of page check (Highest priority)
+            if ((window.innerHeight + window.scrollY) >= document.documentElement.offsetHeight - 50) {
+                setActiveCategory(categories[categories.length - 1]);
+                return;
+            }
+
+            // 2. Find section closest to the middle of the screen
+            let closestCategory = activeCategory;
+            let minDistance = Infinity;
+
+            categories.forEach((cat) => {
+                const element = document.getElementById(cat);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+
+                    // Check if the section covers the middle line
+                    if (rect.top <= middle && rect.bottom >= middle) {
+                        closestCategory = cat;
+                        minDistance = 0; // Perfect match
+                    } else {
+                        // Calculate distance from middle to the section's center or nearest edge
+                        const distance = Math.min(Math.abs(rect.top - middle), Math.abs(rect.bottom - middle));
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestCategory = cat;
+                        }
+                    }
                 }
             });
-        }, {
-            rootMargin: "-120px 0px -80% 0px",
-            threshold: 0
-        });
 
-        categories.forEach((cat) => {
-            const element = document.getElementById(cat);
-            if (element) observer.observe(element);
-        });
+            if (closestCategory !== activeCategory) {
+                setActiveCategory(closestCategory);
+            }
 
-        const handleScroll = () => {
             setIsScrolled(window.scrollY > 100);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        // Initial check
+        handleScroll();
+
         return () => {
-            observer.disconnect();
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [activeCategory, searchQuery]); // Re-bind if categories change (via search)
 
     // Scroll active nav item into view
     useEffect(() => {
+        if (isManualScroll.current) return;
+
         const activeBtn = document.getElementById(`nav-${activeCategory}`);
         if (activeBtn) {
             activeBtn.scrollIntoView({
@@ -101,19 +110,47 @@ export default function OrderPage() {
         }
     }, [activeCategory]);
 
-    // Smooth scroll to category
+    // Smooth scroll to category with scroll-end detection
     const scrollToCategory = (category: Category) => {
         isManualScroll.current = true;
         setActiveCategory(category);
-        const element = document.getElementById(category);
-        if (element) {
-            const y = element.getBoundingClientRect().top + window.scrollY - 100; // Offset for sticky header
-            window.scrollTo({ top: y, behavior: 'smooth' });
 
-            setTimeout(() => {
+        // Wait for potential re-render (e.g. clearing search results)
+        // This ensures the element exists in the DOM before we try to scroll to it
+        setTimeout(() => {
+            const element = document.getElementById(category);
+            if (element) {
+                const y = element.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+
+                // Robust way to detect scroll end
+                let scrollTimeout: NodeJS.Timeout;
+
+                const handleScrollCheck = () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isManualScroll.current = false;
+                        window.removeEventListener('scroll', handleScrollCheck);
+
+                        // Final position check
+                        if ((window.innerHeight + window.scrollY) >= document.documentElement.offsetHeight - 50) {
+                            setActiveCategory(categories[categories.length - 1]);
+                        }
+                    }, 100);
+                };
+
+                window.addEventListener('scroll', handleScrollCheck);
+
+                // Failsafe
+                setTimeout(() => {
+                    isManualScroll.current = false;
+                    window.removeEventListener('scroll', handleScrollCheck);
+                }, 2000);
+            } else {
+                console.warn("Target category element not found:", category);
                 isManualScroll.current = false;
-            }, 800);
-        }
+            }
+        }, 10);
     };
 
     // Animation variants
@@ -284,7 +321,7 @@ export default function OrderPage() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 menuItem={selectedItem}
-                addToCart={addToCart}
+                addToCart={handleAddToCart}
             />
         </main>
     );
