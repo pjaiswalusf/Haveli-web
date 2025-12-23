@@ -26,6 +26,7 @@ interface StepperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> 
         onStepClick: (clicked: number) => void;
     }) => ReactNode;
     isNextDisabled?: boolean;
+    hideNextButton?: boolean;
 }
 
 export default function Stepper({
@@ -44,6 +45,7 @@ export default function Stepper({
     disableStepIndicators = false,
     renderStepIndicator,
     isNextDisabled = false,
+    hideNextButton = false,
     className,
     ...rest
 }: StepperProps) {
@@ -93,7 +95,7 @@ export default function Stepper({
                     stepCircleContainerClassName
                 )}
             >
-                <div className={cn("flex w-full items-center p-6 md:p-8", stepContainerClassName)}>
+                <div className={cn("flex w-full max-w-lg mx-auto items-center p-6 md:p-8", stepContainerClassName)}>
                     {stepsArray.map((_, index) => {
                         const stepNumber = index + 1;
                         const isNotLastStep = index < totalSteps - 1;
@@ -151,17 +153,19 @@ export default function Stepper({
                                     {backButtonText}
                                 </Button>
                             )}
-                            <Button
-                                onClick={isLastStep ? handleComplete : handleNext}
-                                disabled={isNextDisabled}
-                                className={cn(
-                                    "flex items-center justify-center rounded-full bg-primary text-black font-medium px-8 py-2.5 transition-all hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm hover:shadow-md",
-                                    nextButtonProps.className
-                                )}
-                                {...nextButtonProps}
-                            >
-                                {isLastStep ? 'Complete Order' : nextButtonText}
-                            </Button>
+                            {!hideNextButton && (
+                                <Button
+                                    onClick={isLastStep ? handleComplete : handleNext}
+                                    disabled={isNextDisabled}
+                                    className={cn(
+                                        "flex items-center justify-center rounded-full bg-primary text-black font-medium px-8 py-2.5 transition-all hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm hover:shadow-md",
+                                        nextButtonProps.className
+                                    )}
+                                    {...nextButtonProps}
+                                >
+                                    {isLastStep ? 'Complete Order' : nextButtonText}
+                                </Button>
+                            )}
                         </div>
                     </div>
                 )}
