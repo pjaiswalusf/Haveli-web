@@ -92,7 +92,7 @@ export default function MenuHighlights({ onOpenMenu }: MenuHighlightsProps) {
 
                 {/* Left Panel - Text */}
                 <div className="w-full md:w-1/2 h-[45%] md:h-full flex items-center p-6 md:p-12 relative z-40">
-                    <div className="relative max-w-lg w-full flex flex-col justify-center h-full">
+                    <div className="relative max-w-lg w-full flex flex-col h-full">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -113,16 +113,16 @@ export default function MenuHighlights({ onOpenMenu }: MenuHighlightsProps) {
                                         pointerEvents: activeIndex === index ? 'auto' : 'none'
                                     }}
                                     transition={{ duration: 0.5 }}
-                                    className="absolute top-0 left-0 w-full h-full flex flex-col"
+                                    className="absolute top-0 left-0 w-full h-full flex flex-col justify-evenly"
                                 >
-                                    <h3 className="-mt-12 md:mt-8 text-6xl md:text-7xl font-great-vibes text-white mb-2 md:mb-4">{item.name}</h3>
-                                    <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4 md:mb-8">
+                                    <h3 className="-mt-12 md:mt-8 text-6xl md:text-8xl font-great-vibes text-white mb-2 md:mb-4">{item.name}</h3>
+                                    <p className="text-gray-400 text-sm md:text-lg leading-relaxed">
                                         {item.description}
                                     </p>
 
                                     {/* Review Section */}
-                                    <Card className="p-0 pt-2 mt-auto bg-white/5 backdrop-blur-md border border-white/10 rounded-xl relative overflow-hidden min-h-fit">
-                                        <CardContent className="md:p-6 md:h-[230px] flex flex-col justify-between">
+                                    <Card className="mt-2 p-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl relative overflow-hidden min-h-fit">
+                                        <CardContent className="p-3 md:p-6 md:h-auto flex flex-col justify-between">
                                             <div className="flex gap-1 text-primary mb-2 md:mb-3">
                                                 {[...Array(item.review.rating)].map((_, i) => (
                                                     <Star key={i} size={14} fill="currentColor" className="md:w-4 md:h-4" />
@@ -131,7 +131,7 @@ export default function MenuHighlights({ onOpenMenu }: MenuHighlightsProps) {
                                             <p className="text-gray-300 italic mb-2 md:mb-4 text-xs md:text-base line-clamp-3 md:line-clamp-none">
                                                 {item.review.text}
                                             </p>
-                                            <div className="flex flex-col gap-1 text-primary mb-2 md:mb-3">
+                                            <div className="flex flex-col gap-1 text-primary md:mb-3">
                                                 <p className="font-serif text-xs md:text-sm">— {item.review.author}</p>
                                                 <p className="font-serif text-[10px] md:text-xs">{item.review.source}</p>
                                             </div>
