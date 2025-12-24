@@ -41,6 +41,7 @@ function GalleryRow({ images, direction = "left", speed = 150 }: { images: strin
 }
 
 export default function ImageGallery() {
+
     return (
         <section className="py-24 bg-bg overflow-hidden">
             <div className="mb-24 text-center relative z-10">
@@ -51,7 +52,7 @@ export default function ImageGallery() {
             <div className="flex flex-col -rotate-1 scale-105">
                 <GalleryRow images={[...images, ...images]} direction="left" speed={200} />
                 <GalleryRow images={[...images].reverse()} direction="right" speed={250} />
-                <GalleryRow images={[...images, ...images]} direction="left" speed={180} />
+                <GalleryRow images={[...images.slice(13), ...images.slice(0, 13)]} direction="left" speed={180} />
             </div>
         </section>
     );
