@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { reviews } from '../data/reviews';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
+import Image from 'next/image';
 
 const ReviewCard = ({ review, className = "", index }: { review: typeof reviews[0], className?: string, index: number }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -49,12 +50,14 @@ const ReviewCard = ({ review, className = "", index }: { review: typeof reviews[
                             onMouseLeave={() => setIsHovered(false)}
                         >
                             {review.reviewImages.map((img, index) => (
-                                <img
+                                <Image
                                     key={index}
                                     src={img}
                                     alt={`Review food ${index + 1}`}
-                                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                                    fill
+                                    className={`object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
                                         }`}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             ))}
 
@@ -79,10 +82,12 @@ const ReviewCard = ({ review, className = "", index }: { review: typeof reviews[
 
                     <div className="flex items-center gap-4 pt-6 border-t border-stone-100 mt-auto shrink-0">
                         {review.image ? (
-                            <img
+                            <Image
                                 src={review.image}
                                 alt={review.author}
-                                className="w-12 h-12 rounded-full object-cover border-2 border-secondary/20"
+                                width={48}
+                                height={48}
+                                className="rounded-full object-cover border-2 border-secondary/20"
                             />
                         ) : (
                             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif text-xl font-bold">

@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function About() {
     return (
@@ -19,7 +20,13 @@ export default function About() {
                         className="flex-1 relative"
                     >
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5 -z-10">
-                            <img src="/images/logo.png" alt="" className="w-3/4 h-auto object-contain" />
+                            <Image
+                                src="/images/logo.png"
+                                alt=""
+                                width={400}
+                                height={400}
+                                className="w-3/4 h-auto object-contain"
+                            />
                         </div>
                         <h2 className="text-5xl font-serif text-text mb-6 md:text-6xl">
                             Our Story
@@ -41,14 +48,18 @@ export default function About() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="flex-1 relative"
+                        className="flex-1 relative w-full"
                     >
                         <div className="relative z-10 border-2 border-primary p-2 rounded-lg">
-                            <img
-                                src="/images/indoor.jpg"
-                                alt="Haveli Interior"
-                                className="w-full h-auto aspect-[4/3] object-cover rounded block"
-                            />
+                            <div className="relative w-full aspect-[4/3]">
+                                <Image
+                                    src="/images/indoor.jpg"
+                                    alt="Haveli Interior"
+                                    fill
+                                    className="object-cover rounded block"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                            </div>
                         </div>
                         {/* Decorative offset box */}
                         <div className="absolute top-4 left-4 w-full h-full border border-black/10 rounded-lg -z-10" />

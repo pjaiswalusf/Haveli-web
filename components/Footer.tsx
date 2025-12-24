@@ -1,6 +1,7 @@
 'use client';
 import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +42,12 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row gap-12 mb-16 max-w-6xl mx-auto justify-between items-center md:items-stretch">
                     {/* Logo */}
                     <div className="flex justify-center w-full md:w-64">
-                        <img
+                        <Image
                             src="/images/logo.png"
                             alt="Haveli Indian Kitchen Logo"
+                            width={256}
+                            height={100}
+                            className="w-full h-auto"
                         />
                     </div>
 

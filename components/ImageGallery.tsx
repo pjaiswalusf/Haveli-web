@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -28,10 +29,12 @@ function GalleryRow({ images, direction = "left", speed = 150 }: { images: strin
                         key={i}
                         className={`relative w-32 h-32 md:w-60 md:h-60 lg:w-72 lg:h-72  flex-shrink-0 overflow-hidden rounded-3xl ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} hover:rotate-0 transition-transform duration-500`}
                     >
-                        <img
+                        <Image
                             src={src}
                             alt={`Gallery image ${i}`}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 128px, (max-width: 1024px) 240px, 288px"
                         />
                     </div>
                 ))}

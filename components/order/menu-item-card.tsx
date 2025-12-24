@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -21,10 +22,11 @@ export function MenuItemCard({ menuItem, quantity, onAdd, variants }: MenuItemCa
         >
             {menuItem.image && (
                 <div className="w-32 relative shrink-0 bg-zinc-50 border-r border-zinc-100">
-                    <img
+                    <Image
                         src={menuItem.image}
                         alt={menuItem.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
             )}
