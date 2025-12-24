@@ -11,7 +11,7 @@ import {
     DialogFooter
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 
 interface MenuItemModalProps {
     isOpen: boolean;
@@ -56,7 +56,13 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-hidden bg-white text-text font-outfit">
+            <DialogContent showCloseButton={false} className="sm:max-w-[425px] max-h-[90vh] overflow-hidden bg-white text-text font-outfit">
+                <button
+                    onClick={onClose}
+                    className="absolute right-4 top-4 p-2 rounded-full hover:bg-zinc-200 transition-colors z-50 text-text/80 hover:text-text"
+                >
+                    <X className="w-5 h-5" />
+                </button>
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-serif text-primary">{menuItem.name}</DialogTitle>
                     <DialogDescription className="text-text-muted">
@@ -79,7 +85,15 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
                                             : 'border-zinc-200 text-text-muted hover:border-zinc-300'
                                             }`}
                                     >
-                                        {level}
+                                        <div className="flex flex-col items-center gap-1">
+                                            <span className="text-xs leading-none">
+                                                {level === 'Mild' && '🌶️'}
+                                                {level === 'Medium' && '🌶️🌶️'}
+                                                {level === 'Spicy' && '🌶️🌶️🌶️'}
+                                                {level === 'Extra Spicy' && '🌶️🌶️🌶️🌶️'}
+                                            </span>
+                                            <span>{level}</span>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -104,7 +118,7 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
                             <Button
                                 size="icon"
                                 variant="outline"
-                                className="h-8 w-8 rounded-full border-zinc-300 hover:bg-zinc-100"
+                                className="h-8 w-8 rounded-full border-zinc-300"
                                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                             >
                                 <Minus className="w-4 h-4" />
@@ -113,7 +127,7 @@ export function MenuItemModal({ isOpen, onClose, menuItem, addToCart }: MenuItem
                             <Button
                                 size="icon"
                                 variant="outline"
-                                className="h-8 w-8 rounded-full border-zinc-300 hover:bg-zinc-100"
+                                className="h-8 w-8 rounded-full border-zinc-300"
                                 onClick={() => setQuantity(quantity + 1)}
                             >
                                 <Plus className="w-4 h-4" />

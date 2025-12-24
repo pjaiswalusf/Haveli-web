@@ -176,7 +176,7 @@ export default function OrderPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-8xl text-text mb-6 relative inline-block font-serif"
+                        className="text-5xl md:text-8xl text-text mb-6 relative inline-block font-serif"
                     >
                         Order Online
                         <motion.div
@@ -193,7 +193,16 @@ export default function OrderPage() {
                         transition={{ delay: 0.3 }}
                         className="text-text-muted max-w-xl mx-auto text-lg md:text-xl font-light leading-relaxed mt-4"
                     >
-                        Discover the essence of Haveli—crafted with passion and delivered with care to your sanctuary.
+                        Discover the essence of Haveli — crafted with passion and prepared with care for you.
+                    </motion.p>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-primary font-medium mt-6 text-sm tracking-wide uppercase"
+                    >
+                        Available for Pickup Only
                     </motion.p>
                 </div>
             </header>

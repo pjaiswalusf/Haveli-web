@@ -17,9 +17,18 @@ export function MenuItemCard({ menuItem, quantity, onAdd, variants }: MenuItemCa
     return (
         <motion.div
             variants={variants}
-            className="group bg-white border border-zinc-200 rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-xl hover:shadow-black/5 transition-all duration-300 flex flex-col"
+            className="group bg-white border border-zinc-200 rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-xl hover:shadow-black/5 transition-all duration-300 flex h-full"
         >
-            <div className="p-4 flex flex-col h-full">
+            {menuItem.image && (
+                <div className="w-32 relative shrink-0 bg-zinc-50 border-r border-zinc-100">
+                    <img
+                        src={menuItem.image}
+                        alt={menuItem.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                </div>
+            )}
+            <div className="p-4 flex flex-col h-full flex-1">
                 <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-medium text-text group-hover:text-primary transition-colors">
                         {menuItem.name}

@@ -19,6 +19,7 @@
   /* Deep Red */
   --spacing-container: 1200px;
   --spacing-padding: 2rem;
+  --max-width-8xl: 96rem;
 }
 
 /* Custom Scrollbar */
@@ -131,11 +132,9 @@ html.lenis body {
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.48 0.18 25);
-  /* Deep Red #c0392b approx */
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.48 0.18 25);
-  /* Deep Red #c0392b approx */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -170,8 +169,7 @@ html.lenis body {
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.48 0.18 25);
-  /* Deep Red #c0392b */
+  --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.48 0.18 25);
   /* Deep Red #c0392b */

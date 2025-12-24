@@ -21,6 +21,7 @@ export interface MenuItem {
     isSpicy?: boolean;
     isGlutenFree?: boolean; // Inferred or placeholder
     hasSpiceLevel?: boolean; // Controls if spice level option is shown
+    image?: string;
 }
 
 export interface CartItem {
@@ -62,7 +63,7 @@ export const menuItems: MenuItem[] = [
     { id: "soup-7", name: "Seafood Mulligatawny Soup", description: "Chef's selection of seafood simmered in lentil and coconut broth", price: "$9.95", category: "Soups" },
 
     // TANDOOR
-    { id: "tan-1", name: "Chicken Tikka", description: "Marinated overnight in seasoned yogurt", price: "$18.95", category: "Tandoor" },
+    { id: "tan-1", name: "Chicken Tikka", description: "Marinated overnight in seasoned yogurt", price: "$18.95", category: "Tandoor", image: "/images/chicken-tikka.png" },
     { id: "tan-2", name: "Chicken Tikka Hariyali", description: "Marinated in mint cilantro yogurt", price: "$18.95", category: "Tandoor" },
     { id: "tan-3", name: "Malai Tikka", description: "Chicken marinated in seasoned cream", price: "$18.95", category: "Tandoor" },
     { id: "tan-4", name: "Tandoori Chicken", description: "Marinated in lemon yogurt, baked in a traditional clay pot", price: "$18.95", category: "Tandoor" },
@@ -108,7 +109,7 @@ export const menuItems: MenuItem[] = [
     { id: "nv-5", name: "Andhra Chicken Curry", description: "Marinated with roasted spices, simmered in an onion & tomato sauce", price: "$18.95", category: "Non-Vegetarian Entrees" },
     { id: "nv-6", name: "Gongura Chicken", description: "Cooked in sour gongura leaves", price: "$18.95", category: "Non-Vegetarian Entrees" },
     { id: "nv-7", name: "Chicken Vindaloo", description: "Cooked in a sauce made of chili, garlic & spices", price: "$18.95", category: "Non-Vegetarian Entrees", isSpicy: true },
-    { id: "nv-8", name: "Butter Chicken", description: "Tandoor baked & simmered in rich creamy tomato sauce", price: "$19.95", category: "Non-Vegetarian Entrees" },
+    { id: "nv-8", name: "Butter Chicken", description: "Tandoor baked & simmered in rich creamy tomato sauce", price: "$19.95", category: "Non-Vegetarian Entrees", image: "/images/butter-chicken.png" },
     { id: "nv-9", name: "Chicken Tikka Masala", description: "Sauteed and simmered in tikka masala gravy", price: "$19.95", category: "Non-Vegetarian Entrees" },
     { id: "nv-10", name: "Chicken Shahi Korma", description: "Chicken & onion simmered in cream based sauce", price: "$18.95", category: "Non-Vegetarian Entrees" },
     { id: "nv-11", name: "Kadai Chicken", description: "Chicken sauteed with onion, bell peppers, onions & tomato gravy", price: "$19.95", category: "Non-Vegetarian Entrees" },
@@ -144,7 +145,7 @@ export const menuItems: MenuItem[] = [
     { id: "rice-8", name: "Shrimp Biryani/Rice/Noodles", price: "$19.95", category: "Biryani & Rice" },
 
     // BREADS
-    { id: "bread-1", name: "Plain Naan", price: "$2.95", category: "Breads", isVegetarian: true },
+    { id: "bread-1", name: "Plain Naan", price: "$2.95", category: "Breads", isVegetarian: true, image: "/images/naan.png" },
     { id: "bread-2", name: "Butter Naan", price: "$2.95", category: "Breads", isVegetarian: true },
     { id: "bread-3", name: "Garlic Naan", price: "$3.95", category: "Breads", isVegetarian: true },
     { id: "bread-4", name: "Chili Naan", price: "$3.95", category: "Breads", isVegetarian: true, hasSpiceLevel: true },

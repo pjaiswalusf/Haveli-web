@@ -44,7 +44,7 @@ export function OrderNav({
             </Link>
 
             <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-zinc-100 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+                <div className="max-w-8xl mx-auto px-4 h-16 flex items-center gap-4">
                     {/* Mobile Nav: Search + Category Selector */}
                     <div className="flex md:hidden items-center gap-2 w-full">
                         <AnimatePresence mode="wait">

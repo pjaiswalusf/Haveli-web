@@ -48,12 +48,9 @@ export function CartDrawer({ isOpen, setIsOpen, cart, updateQuantity, removeFrom
                                     <p className="text-xl font-bold">${cartTotalPrice.toFixed(2)}</p>
                                 </div>
                             </div>
-                            <Button
-                                variant="ghost"
-                                className="hover:bg-black/10 text-black font-bold flex items-center gap-2 pr-2"
-                            >
+                            <p className="text-sm font-medium opacity-80 cursor-pointer hover:underline pr-2">
                                 View Cart
-                            </Button>
+                            </p>
                         </div>
                     </motion.div>
                 )}
@@ -61,7 +58,7 @@ export function CartDrawer({ isOpen, setIsOpen, cart, updateQuantity, removeFrom
 
             {/* Cart Drawer */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetContent className="bg-white border-zinc-200 text-text w-full sm:max-w-md p-0 flex flex-col">
+                <SheetContent className="bg-white border-zinc-200 text-text w-full sm:max-w-lg p-0 flex flex-col">
                     <SheetHeader className="p-6 border-b border-zinc-100">
                         <SheetTitle className="text-2xl font-serif text-primary">Your Order</SheetTitle>
                     </SheetHeader>
@@ -85,46 +82,48 @@ export function CartDrawer({ isOpen, setIsOpen, cart, updateQuantity, removeFrom
 
                                 return (
                                     <React.Fragment key={item.uniqueId}>
-                                        <div className="flex justify-between items-start group font-outfit">
-                                            <div className="flex-1">
-                                                <h4 className="font-medium text-text">{item.menuItem.name}</h4>
+                                        <div className="flex flex-col w-full font-outfit">
+                                            <div className="flex justify-between items-start">
+                                                <div className="flex-1 pr-2">
+                                                    <h4 className="font-medium text-text">{item.menuItem.name}</h4>
 
-                                                {/* Customizations Display */}
-                                                <div className="text-xs text-text-muted mt-1 space-y-0.5">
-                                                    {item.customization?.spiceLevel && (
-                                                        <p>Spice: {item.customization.spiceLevel}</p>
-                                                    )}
-                                                    {item.customization?.instructions && (
-                                                        <p className="italic">"{item.customization.instructions}"</p>
-                                                    )}
-                                                </div>
-
-                                                <p className="text-sm text-text-muted mt-1">{item.menuItem.price} each</p>
-
-                                                <div className="flex items-center gap-3 mt-2">
-                                                    <div className="flex items-center gap-2 bg-zinc-100 rounded-lg p-1">
-                                                        <button
-                                                            onClick={() => updateQuantity(item.uniqueId, -1)}
-                                                            className="p-1 hover:text-primary transition-colors text-text"
-                                                        >
-                                                            <Minus className="w-3 h-3" />
-                                                        </button>
-                                                        <span className="text-xs font-bold min-w-[20px] text-center text-text">
-                                                            {item.quantity}
-                                                        </span>
-                                                        <button
-                                                            onClick={() => updateQuantity(item.uniqueId, 1)}
-                                                            className="p-1 hover:text-primary transition-colors text-text"
-                                                        >
-                                                            <Plus className="w-3 h-3" />
-                                                        </button>
+                                                    {/* Customizations Display */}
+                                                    <div className="text-xs text-text-muted mt-1 space-y-0.5">
+                                                        {item.customization?.spiceLevel && (
+                                                            <p>Spice: {item.customization.spiceLevel}</p>
+                                                        )}
+                                                        {item.customization?.instructions && (
+                                                            <p className="italic">"{item.customization.instructions}"</p>
+                                                        )}
                                                     </div>
+
+                                                    <p className="text-sm text-text-muted mt-1">{item.menuItem.price} each</p>
                                                 </div>
-                                            </div>
-                                            <div className="flex flex-col h-full min-h-[80px] items-end justify-between">
                                                 <p className="font-bold text-primary">${itemTotal.toFixed(2)}</p>
+                                            </div>
+
+                                            <div className="flex items-center justify-between mt-3">
+                                                <div className="flex items-center gap-2 bg-zinc-100 rounded-lg p-1">
+                                                    <button
+                                                        onClick={() => updateQuantity(item.uniqueId, -1)}
+                                                        className="p-1 hover:text-primary transition-colors text-text"
+                                                    >
+                                                        <Minus className="w-3 h-3" />
+                                                    </button>
+                                                    <span className="text-xs font-bold min-w-[20px] text-center text-text">
+                                                        {item.quantity}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => updateQuantity(item.uniqueId, 1)}
+                                                        className="p-1 hover:text-primary transition-colors text-text"
+                                                    >
+                                                        <Plus className="w-3 h-3" />
+                                                    </button>
+                                                </div>
                                                 <Button
                                                     variant="ghost_destructive"
+                                                    size="icon"
+                                                    className="h-8 w-8"
                                                     onClick={() => removeFromCart(item.uniqueId)}
                                                 >
                                                     <Trash2 className="w-4 h-4" />
